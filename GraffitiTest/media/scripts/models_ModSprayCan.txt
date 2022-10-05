@@ -1,0 +1,9 @@
+module Base
+{
+	model SprayCan
+	{
+		mesh = WorldItems/SprayCan,
+		texture = WorldItems/SprayCan,
+		scale = 0.01,
+	}
+}

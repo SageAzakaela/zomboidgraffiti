@@ -1,0 +1,7 @@
+UI_EN = {
+	UI_GT_Input_Title = "Graffiti!",
+	UI_GT_btn_tag = "TAG!",
+	UI_GT_style_choice = "Graffiti Style",
+	UI_GT_text_entry = "Graffiti Message",
+		
+}

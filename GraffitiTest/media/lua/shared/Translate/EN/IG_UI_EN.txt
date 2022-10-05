@@ -1,0 +1,6 @@
+IG_UI_EN = {
+	IGUI_GT_Tag_Wall = "Tag Wall",
+	IGUI_GT_Remove_Tags = "Remove All Graffiti",
+	IGUI_GT_Tag_Western_Wall = "Tag Western Wall",
+	IGUI_GT_Tag_Northern_Wall = "Tag Northern Wall",
+}

@@ -1,0 +1,6 @@
+name=Graffiti Proof of Concept
+poster=poster.png
+id=GraffitiTEST
+description=Test adding graffiti.
+pack=mod_graffiti
+tiledef=mod_graffiti 739
