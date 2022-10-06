@@ -1,5 +1,6 @@
-require "client/GT_GraffitiPacksDef"
-require "TimedActions/GTTagSingle"
+local GraffitiPacksDefs = require "GT_GraffitiPacksDefs"
+local GTTagSingle = require "TimedActions/GTTagSingle"
+local GTTagInput = require "ISUI/GTTagInput"
 
 local function GT_transformMessage(message, tileset)
 	local transformed = {}
@@ -349,15 +350,24 @@ local function GT_cleanWall(objects, player, square, wall)
 end
 
 --Text
---GTTest = "zeds must die"
---GTTileset = mod_graffiti_style2
+local GTTest = "Testito xd"
+local GTTileset = GraffitiPacksDefs.mod_graffiti
 
 --Symbols
-GTTest = { "Yin_Yang", "Troll", "Aza" }
-GTTileset = mod_graffiti_symbols
+--local GTTest = { "Yin_Yang", "Troll", "Aza" }
+--local GTTileset = mod_graffiti_symbols
 
-GTColor = { r=0.9, g=0, b=0, a=0.5 }
-GTDir = 1
+local GTColor = { r=1.0, g=1.0, b=1.0, a=1.0 }
+local GTDir = 1
+
+local function GTTagInputCallBack(style, text)
+	local source = getPlayer();
+
+	GT_paintMessage(source:getPlayerNum(), style, text, GTColor, GTDir, source:getX(), source:getY(), source:getZ())
+end
+
+
+
 
 local function GT_helloWorld(playerNum)
 	local player = getSpecificPlayer(playerNum)
@@ -366,13 +376,19 @@ local function GT_helloWorld(playerNum)
 end
 
 local function GT_keyHandler(keyNum)
-	local player = getPlayer()
+	local player = getPlayer(); if not player then return end -- Prevents error if player is not loaded yet.
+	local playerInventory = player:getInventory(); -- Get Inventory of player
+
 	
-	if keyNum == Keyboard.KEY_Y and player ~= nil and player:getVehicle() == nil then
-		GT_helloWorld(player:getPlayerNum())
-	elseif keyNum == Keyboard.KEY_U and player ~= nil and player:getVehicle() == nil then
-		GT_eraseGraffiti(player:getPlayerNum(), mod_graffiti.tilesetbase)
-		GT_eraseGraffiti(player:getPlayerNum(), mod_graffiti_style2.tilesetbase)
+	if keyNum == Keyboard.KEY_Y and player:getVehicle() == nil then
+		if playerInventory:contains("Base.SprayCan") then
+			GT_helloWorld(player:getPlayerNum());
+		end
+	end
+
+	if keyNum == Keyboard.KEY_U and player:getVehicle() == nil then
+		GT_eraseGraffiti(player:getPlayerNum(), GraffitiPacksDefs.mod_graffiti.tilesetbase)
+		GT_eraseGraffiti(player:getPlayerNum(), GraffitiPacksDefs.mod_graffiti_style2.tilesetbase)
 	end
 end
 
@@ -380,7 +396,7 @@ local function GT_tagWall(objects, playerObj, curSquare)
 	local sw = getCore():getScreenWidth()
 	local sh = getCore():getScreenHeight()
 	
-	local textInput = GTTagInput:new(sw / 2 - 250, sh / 2 - 250, 500, 500)
+	local textInput = GTTagInput:new(sw / 2 - 250, sh / 2 - 250, 500, 500, GraffitiPacksDefs, GTTagInputCallBack)
 	textInput:instantiate()
 	textInput:addToUIManager()
 	textInput:setVisible(true, nil)

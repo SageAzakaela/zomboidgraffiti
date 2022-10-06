@@ -10,7 +10,7 @@ require "ISUI/ISInventoryPane"
 require "ISUI/ISResizeWidget"
 require "ISUI/ISMouseDrag"
 
-GTTagInput = ISCollapsableWindowJoypad:derive("GTTagInput")
+local GTTagInput = ISCollapsableWindowJoypad:derive("GTTagInput")
 
 local FONT_HGT_SMALL = getTextManager():getFontHeight(UIFont.Small)
 local FONT_HGT_MEDIUM = getTextManager():getFontHeight(UIFont.Medium)
@@ -192,8 +192,15 @@ function GTTagInput:createChildren()
 	self.tagStyleEntry:setAnchorTop(true)
 	self.tagStyleEntry:setAnchorBottom(false)
 	self.tagStyleEntry:setEditable(false)
-	
+
+	for k, v in pairs(self.styles) do
+		self.tagStyleEntry:addOptionWithData(v.displayName, v);
+		--self.tagStyleEntry:addOption(v.displayName);
+	end
+
 	self.tagEntryPanel:addChild(self.tagStyleEntry)
+
+	
 	
 	
 	self.tagTextEntry = ISTextEntryBox:new("Test", entryX, 16 + 8 + entryHgt, self.width - entryX - 16, entryHgt);
@@ -210,6 +217,13 @@ function GTTagInput:createChildren()
 	--TODO: Create color sliders
 end
 
+function GTTagInput:getText()
+	return self.tagTextEntry:getText();
+end
+
+function GTTagInput:getStyle()
+	return self.tagStyleEntry.options[self.tagStyleEntry.selected].data;
+end
 
 function GTTagInput:setVisible(bVisible, joypadData)
 	if self.javaObject == nil then
@@ -226,7 +240,9 @@ function GTTagInput:onOptionMouseDown(button, x, y)
 	end
 	if button.internal == "TAG" then
 		self:setVisible(false, nil)
-		print(self.tagTextEntry:getText())
+		--print(self.tagTextEntry:getText())
+		--print(self:getStyle());
+		self.callback(self:getStyle(), self:getText());
 	end
 end
 
@@ -314,12 +330,14 @@ function GTTagInput:onResolutionChange(oldw, oldh, neww, newh)
 	]]--
 end
 
-function GTTagInput:new (x, y, width, height)
+function GTTagInput:new (x, y, width, height, styles, cb)
 	local o = {};
 	o = ISCollapsableWindowJoypad.new(self, x, y, width, height);
 	setmetatable(o, self);
 	self.__index = self;
 
+	o.styles = styles;
+	o.callback = cb;
 	o.borderColor = { r=0.4, g=0.4, b=0.4, a=1 }
 	o.backgroundColor = { r=0, g=0, b=0, a=0.8 }
 	
@@ -340,3 +358,6 @@ function GTTagInput:new (x, y, width, height)
 	GTTagInput.instance = o;
 	return o;
 end
+
+
+return GTTagInput
