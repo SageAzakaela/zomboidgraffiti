@@ -6,7 +6,7 @@
 
 require "TimedActions/ISBaseTimedAction"
 
-GTTagSingle = ISBaseTimedAction:derive("GTTagSingle")
+local GTTagSingle = ISBaseTimedAction:derive("GTTagSingle")
 
 function GTTagSingle:isValid()
 	--TODO: Test for the character being on the same square as our action
@@ -30,7 +30,7 @@ function GTTagSingle:start()
 	--self.item:setJobType(self.jobType)
 	
 	-- Todo? - Find a better animation for working on a raised object
-	self:setActionAnim("VehicleWorkOnMid")
+	self:setActionAnim("Bob_Spray");
 end
 
 function GTTagSingle:stop()
@@ -115,3 +115,5 @@ function GTTagSingle:new(character, squareObj, wallObj, direction, position, pos
 	o.jobType = getText("IGUI_GT_Tag_Wall")
 	return o
 end
+
+return GTTagSingle

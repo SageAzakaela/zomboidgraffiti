@@ -5,7 +5,7 @@
 
 require "ISUI/ISPanelJoypad"
 
-GTTagInputPaused = ISPanelJoypad:derive("GTTagInputPaused");
+local GTTagInputPaused = ISPanelJoypad:derive("GTTagInputPaused");
 
 function GTTagInputPaused:accept()
 --	self:setVisible(false)
@@ -350,3 +350,6 @@ function GTTagInputPaused:OnJoypadBeforeDeactivate(index)
 		self:cancel()
 	end
 end
+
+
+return GTTagInputPaused

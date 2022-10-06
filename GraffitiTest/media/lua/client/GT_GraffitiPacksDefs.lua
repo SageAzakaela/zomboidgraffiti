@@ -1,4 +1,6 @@
-mod_graffiti = {
+local self = {}
+
+self.mod_graffiti = {
 	displayName="Azakaela's Graffiti",
 	tilesetType="text",
 	tilesetbase="mod_graffiti_",
@@ -60,11 +62,11 @@ mod_graffiti = {
 	invalidCharOffset=nil,
 	singleWhitespace=string.char(32),
 	positionsPerSquare=3,
-	positionOffsets={ 0, 32, 64, },
+	positionOffsets={ 0, 32, 64 },
 	directionSuffixes={ "west_", "north_" },
 }
 
-mod_graffiti_style2 = {
+self.mod_graffiti_style2 = {
 	displayName="Azakaela's Graffiti Style 2",
 	tilesetType="text",
 	tilesetbase="mod_graffiti_style2_",
@@ -121,16 +123,16 @@ mod_graffiti_style2 = {
 		[string.char(119)]=22,
 		[string.char(120)]=23,
 		[string.char(121)]=24,
-		[string.char(122)]=25,
+		[string.char(122)]=25
 	},
 	invalidCharOffset=nil,
 	singleWhitespace=string.char(32),
 	positionsPerSquare=3,
-	positionOffsets={ 0, 32, 64, },
+	positionOffsets={ 0, 32, 64 },
 	directionSuffixes={ "west_", "north_" },
 }
 
-mod_graffiti_symbols = {
+self.mod_graffiti_symbols = {
 	displayName="Azakaela's Symbols",
 	tilesetType="image",
 	tilesetbase="mod_graffiti_symbols_",
@@ -207,3 +209,5 @@ mod_graffiti_symbols = {
 	positionOffsets={ 0, },
 	directionSuffixes={ "west_", "north_" },
 }
+
+return self
