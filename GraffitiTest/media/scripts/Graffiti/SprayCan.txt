@@ -1,0 +1,43 @@
+module Graffiti
+{
+
+    item SprayCanWhite
+	{
+	    DisplayCategory = Paint,
+		Weight	=	0.3,
+		Type	=	Drainable,
+		ReplaceOnUse 	    = 	Graffiti.SprayCanEmpty,
+		UseWhileEquipped	=	FALSE,
+		UseDelta	=	0.1,
+		DisplayName	=	White Spray Can,
+		Icon	=	SprayCan_White,
+		StaticModel = Graffiti.SprayCan,
+		WorldStaticModel = Graffiti.SprayCan,
+	}
+	
+	item SprayCanRed
+	{
+		DisplayCategory = Paint,
+		Weight	=	0.3,
+		Type	=	Drainable,
+		ReplaceOnUse 	    = 	Graffiti.SprayCanEmpty,
+		UseWhileEquipped	=	FALSE,
+		UseDelta	=	0.1,
+		DisplayName	=	Red Spray Can,
+		Icon	=	SprayCan_White, /*   Need create icon */
+		StaticModel = Graffiti.SprayCan,
+		WorldStaticModel = Graffiti.SprayCan,
+	}
+
+	item SprayCanEmpty
+	{
+		DisplayCategory = Paint,
+		Weight	=	0.1,
+		Type	=	Normal,
+		UseWhileEquipped	=	FALSE,
+		DisplayName	=	Empty Spray Can,
+		Icon	=	SprayCan_White,
+		StaticModel = Graffiti.SprayCan,
+		WorldStaticModel = Graffiti.SprayCan,
+	}
+}
